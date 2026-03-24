@@ -60,9 +60,6 @@ export default function CompilationTab() {
           </Tooltip.Content>
         </Tooltip>
       </div>
-      <p className="text-neutral-400 text-sm">
-        Veja como o JSON do OpenAPI é gerado a partir do código-fonte do backend.
-      </p>
       
       <div className="bg-[#0a0a0a] border border-neutral-800 rounded-lg p-4 font-mono text-sm shadow-inner relative overflow-hidden min-h-[300px]">
         <div className="flex items-center gap-2 mb-4 text-neutral-500 border-b border-neutral-800 pb-2">

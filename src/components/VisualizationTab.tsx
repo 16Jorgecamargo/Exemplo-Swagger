@@ -72,9 +72,6 @@ export default function VisualizationTab() {
           </Tooltip.Content>
         </Tooltip>
       </div>
-      <p className="text-neutral-400 text-sm">
-        Aqui está a interface interativa gerada a partir do nosso JSON. Você pode expandir os endpoints e testar as requisições (Try it out) para ver os retornos simulados.
-      </p>
       
       <div className="bg-white rounded-lg overflow-hidden border border-neutral-800 p-4 swagger-dark-wrapper">
         <SwaggerUI 
