@@ -1,0 +1,5 @@
+{
+  "name": "Swagger & OpenAPI Explorer",
+  "description": "Uma plataforma interativa para aprender e visualizar como o Swagger e o OpenAPI funcionam na prática.",
+  "requestFramePermissions": []
+}

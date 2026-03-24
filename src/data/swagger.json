@@ -1,0 +1,290 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "E-commerce API",
+    "description": "API detalhada para gerenciamento de um e-commerce. Inclui operações de produtos e categorias.",
+    "version": "1.0.0",
+    "contact": {
+      "name": "Suporte API",
+      "email": "suporte@ecommerce.com"
+    }
+  },
+  "servers": [
+    {
+      "url": "/api",
+      "description": "Servidor de Desenvolvimento (Mock)"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Produtos",
+      "description": "Gerenciamento de produtos do catálogo"
+    },
+    {
+      "name": "Categorias",
+      "description": "Gerenciamento de categorias de produtos"
+    }
+  ],
+  "paths": {
+    "/products": {
+      "get": {
+        "tags": ["Produtos"],
+        "summary": "Lista todos os produtos",
+        "description": "Retorna uma lista paginada de todos os produtos disponíveis no catálogo.",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Número da página",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 1
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Quantidade de itens por página",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 10
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Lista de produtos retornada com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Product"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": ["Produtos"],
+        "summary": "Cria um novo produto",
+        "description": "Adiciona um novo produto ao catálogo do e-commerce.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProductInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Produto criado com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Product"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Dados inválidos fornecidos"
+          }
+        }
+      }
+    },
+    "/products/{id}": {
+      "get": {
+        "tags": ["Produtos"],
+        "summary": "Obtém um produto pelo ID",
+        "description": "Retorna os detalhes completos de um produto específico baseado no seu ID.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID numérico do produto",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Detalhes do produto",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Product"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Produto não encontrado"
+          }
+        }
+      },
+      "put": {
+        "tags": ["Produtos"],
+        "summary": "Atualiza um produto",
+        "description": "Atualiza os dados de um produto existente no catálogo.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID numérico do produto",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProductInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Produto atualizado com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Product"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Produto não encontrado"
+          }
+        }
+      },
+      "delete": {
+        "tags": ["Produtos"],
+        "summary": "Deleta um produto",
+        "description": "Remove um produto do catálogo permanentemente.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID numérico do produto",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Produto deletado com sucesso"
+          },
+          "404": {
+            "description": "Produto não encontrado"
+          }
+        }
+      }
+    },
+    "/categories": {
+      "get": {
+        "tags": ["Categorias"],
+        "summary": "Lista todas as categorias",
+        "description": "Retorna uma lista de todas as categorias de produtos disponíveis.",
+        "responses": {
+          "200": {
+            "description": "Lista de categorias retornada com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Category"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Product": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "example": 1
+          },
+          "name": {
+            "type": "string",
+            "example": "Smartphone XYZ"
+          },
+          "price": {
+            "type": "number",
+            "format": "float",
+            "example": 1999.99
+          },
+          "description": {
+            "type": "string",
+            "example": "Um smartphone avançado com 128GB de armazenamento."
+          },
+          "categoryId": {
+            "type": "integer",
+            "example": 2
+          }
+        }
+      },
+      "ProductInput": {
+        "type": "object",
+        "required": ["name", "price", "categoryId"],
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "Smartphone XYZ"
+          },
+          "price": {
+            "type": "number",
+            "format": "float",
+            "example": 1999.99
+          },
+          "description": {
+            "type": "string",
+            "example": "Um smartphone avançado com 128GB de armazenamento."
+          },
+          "categoryId": {
+            "type": "integer",
+            "example": 2
+          }
+        }
+      },
+      "Category": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "example": 2
+          },
+          "name": {
+            "type": "string",
+            "example": "Eletrônicos"
+          }
+        }
+      }
+    }
+  }
+}

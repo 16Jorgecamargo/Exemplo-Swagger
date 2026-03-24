@@ -1,0 +1,17 @@
+@import "tailwindcss";
+@import "@heroui/styles/css";
+
+/* Swagger UI Dark Theme Overrides */
+.swagger-dark-wrapper {
+  filter: invert(0.88) hue-rotate(180deg);
+}
+.swagger-dark-wrapper .swagger-ui .opblock .opblock-summary-method {
+  filter: invert(1) hue-rotate(180deg);
+}
+.swagger-dark-wrapper .swagger-ui .expand-operation,
+.swagger-dark-wrapper .swagger-ui .opblock-control-arrow {
+  filter: invert(1);
+}
+.swagger-dark-wrapper .swagger-ui .model-toggle:after {
+  filter: invert(1);
+}
